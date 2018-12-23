@@ -44,7 +44,6 @@
     name: docker
     state: present
     system: yes
-  notify: restart docker
   become: yes
 
 - name: Add user to docker group.
