@@ -1,0 +1,15 @@
+---
+- name: Download Chef Workstation
+  get_url:
+    url: https://packages.chef.io/files/stable/chef-workstation/0.2.41/ubuntu/18.04/chef-workstation_0.2.41-1_amd64.deb
+    dest: /opt/ansible/packages/chef-workstation.deb
+    sha256sum: 046704967aa6541ed12d7bebf9d442514745a60fa8db3de27d20364f8b9179df
+  become: yes
+  register: chef_workstation_download
+
+- name: Install Chef Workstation
+  apt:
+    deb: /opt/ansible/packages/chef-workstation.deb
+    state: present
+  become: yes
+  when: chef_workstation_download.changed

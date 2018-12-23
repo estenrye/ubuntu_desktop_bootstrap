@@ -10,3 +10,6 @@
 
 - name: Install Packer
   include_tasks: packer.yml
+
+- name: Install Chef Workstation
+  include_tasks: chef.yml
