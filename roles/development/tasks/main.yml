@@ -2,3 +2,5 @@
 - name: Configure Git
   include_tasks: git.yml
 
+- name: Install VSCode
+  include_tasks: vscode.yml

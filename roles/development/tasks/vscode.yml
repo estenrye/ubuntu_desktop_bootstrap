@@ -1,0 +1,18 @@
+---
+- name: Add Microsoft apt repository signing key
+  apt_key:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+    state: present
+  become: yes
+
+- name: Add VSCode apt repository
+  apt_repository:
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+  become: yes
+
+- name: Install VSCode
+  apt:
+    name: code
+    state: latest
+    update_cache: yes
+  become: yes
