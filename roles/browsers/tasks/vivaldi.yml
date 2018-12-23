@@ -1,0 +1,6 @@
+---
+- name: Install Vivaldi browser
+  apt:
+    deb: https://downloads.vivaldi.com/stable/vivaldi-stable_2.2.1388.37-1_amd64.deb
+    state: present
+  become: yes

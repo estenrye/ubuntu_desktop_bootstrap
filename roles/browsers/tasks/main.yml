@@ -1,0 +1,3 @@
+---
+- name: Install Vivaldi
+  include_tasks: vivaldi.yml

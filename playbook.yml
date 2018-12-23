@@ -8,6 +8,7 @@
     - { role: remote_access, tags: remote_access }
     - { role: geerlingguy.git, tags: git }
     - { role: development, tags: development }
+    - { role: browsers, tags: browsers }
   vars_prompt:
     - name: primary_user
       prompt: Please enter the username of the primary user
