@@ -1,0 +1,85 @@
+---
+- name: Remove unsupported docker packages
+  apt:
+    name:
+    - docker
+    - docker-engine
+    - docker.io
+    state: absent
+  become: yes
+
+- name: Ensure docker pre-requisites are installed.
+  apt:
+    name: 
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - python-pip
+    state: present
+  become: yes
+
+- name: Get Docker's official GPG key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+  become: yes
+
+- name: Add Docker CE Stable Repository
+  apt_repository:
+    repo: "{{docker.repository}}"
+    state: present
+  become: yes
+
+- name: Install docker-ce
+  apt:
+    name: docker-ce
+    state: latest
+    update_cache: yes
+  become: yes
+
+- name: Ensure docker group is present
+  group:
+    gid: '1337'
+    name: docker
+    state: present
+    system: yes
+  notify: restart docker
+  become: yes
+
+- name: Add user to docker group.
+  user:
+    name: "{{ primary_user }}"
+    groups: docker
+    append: yes
+  become: yes
+
+- name: Install docker-compose
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/{{docker.compose.version}}/docker-compose-Linux-x86_64"
+    dest: /usr/local/bin/docker-compose
+    mode: 0755
+    checksum: "{{docker.compose.checksum}}"
+  become: yes
+
+- name: Install docker python module.
+  pip:
+    name: 
+      - docker
+      - paramiko
+    state: present
+  become: yes
+
+- name: Ensure docker swarm is present.
+  docker_swarm:
+    state: present
+  when: 
+    - docker.swarm.enabled
+  become: yes
+
+- name: restart docker
+  service:
+    name: docker
+    state: restarted
+    enabled: yes
+  become: yes

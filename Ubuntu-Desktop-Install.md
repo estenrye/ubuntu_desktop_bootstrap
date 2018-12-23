@@ -20,4 +20,5 @@
 
 # Manual package installations
 
-1. `sudo apt install -y ansible`
+1. `sudo apt-add-repository ppa:ansible/ansible`
+2. `sudo apt install -y ansible`

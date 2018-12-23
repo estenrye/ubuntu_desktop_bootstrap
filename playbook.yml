@@ -9,6 +9,7 @@
     - { role: geerlingguy.git, tags: git }
     - { role: development, tags: development }
     - { role: browsers, tags: browsers }
+    - { role: docker, tags: docker }
   vars_prompt:
     - name: primary_user
       prompt: Please enter the username of the primary user
