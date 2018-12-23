@@ -10,6 +10,7 @@
     state: started
     enabled: yes
 
+# From http://c-nergy.be/blog/?p=12073
 - name: Add polkit authorization file to allow colord
   template:
     src: 02-allow-colord.conf.j2
