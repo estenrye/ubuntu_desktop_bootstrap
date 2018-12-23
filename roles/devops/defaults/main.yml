@@ -3,6 +3,14 @@ docker:
   compose:
     version: 1.23.1
     checksum: "sha256:c176543737b8aea762022245f0f4d58781d3cb1b072bc14f3f8e5bb96f90f1a2"
-  repository: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+  repository: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
   swarm:
     enabled: true
+
+vagrant:
+  version: 2.2.2
+  sha256sum: 4DEC711612C4350733E01745AB9F5ACEE2FBF9756AB9728B19A4664CAE5C275D
+
+virtualbox:
+  repository: deb https://download.virtualbox.org/virtualbox/debian bionic contrib
+  version: 6.0

@@ -1,3 +1,16 @@
 ---
+- name: Download Vagrant
+  get_url:
+    url: "https://releases.hashicorp.com/vagrant/{{ vagrant.version }}/vagrant_{{ vagrant.version }}_x86_64.deb"
+    dest: /opt/ansible/packages/vagrant.deb
+    sha256sum: "{{ vagrant.sha256sum }}"
+  become: yes
+  register: vagrant_download
+
 - name: Install Vagrant
+  apt:
+    deb: /opt/ansible/packages/vagrant.deb
+    state: present
+  become: yes
+  when: vagrant_download.changed
   

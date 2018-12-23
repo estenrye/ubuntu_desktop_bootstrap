@@ -1,3 +1,9 @@
 ---
 - name: Install Docker
   include_tasks: docker.yml
+
+- name: Install Vagrant
+  include_tasks: vagrant.yml
+
+- name: Install VirtualBox
+  include_tasks: virtualbox.yml
