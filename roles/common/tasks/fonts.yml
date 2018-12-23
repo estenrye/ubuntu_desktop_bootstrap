@@ -13,7 +13,6 @@
 
 - name: Extract Iosevka
   unarchive:
-    remote_src: True
     src: /opt/ansible/packages/iosevka.zip
     dest: /opt/ansible/packages/iosevka
   when: iosevka_download.changed
@@ -25,6 +24,7 @@
   with_fileglob:
     - /opt/ansible/packages/iosevka/ttf/*.ttf
   register: fonts_copied
+  when: iosevka_download.changed
 
 - name: Reload fonts
   shell: fc-cache

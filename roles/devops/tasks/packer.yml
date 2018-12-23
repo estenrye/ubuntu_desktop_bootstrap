@@ -1,0 +1,15 @@
+---
+- name: Download Packer
+  get_url:
+    url: "https://releases.hashicorp.com/packer/{{ packer.version }}/packer_{{ packer.version }}_linux_amd64.zip"
+    dest: /opt/ansible/packages/packer.zip
+    sha256sum: "{{ packer.sha256sum }}"
+  become: yes
+  register: packer_download
+
+- name: Extract Packer
+  unarchive:
+    src: /opt/ansible/packages/packer.zip
+    dest: /usr/bin
+  become: yes
+  when: packer_download.changed
