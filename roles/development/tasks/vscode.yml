@@ -16,3 +16,12 @@
     state: latest
     update_cache: yes
   become: yes
+
+- name: List VSCode extensions
+  shell: code --list-extensions
+  register: installed_extensions
+
+- name: Install VSCode extensions
+  shell: "code --install-extension {{ item }}"
+  when: installed_extensions.stdout.find(item) == -1
+  loop: "{{ vscode_extensions }}"

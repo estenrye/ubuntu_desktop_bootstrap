@@ -1,0 +1,7 @@
+vscode_extensions:
+  - vscoss.vscode-ansible
+  - ms-vscode.csharp
+  - peterjausovec.vscode-docker
+  - pendrica.chef
+  - editorconfig.editorconfig
+  
