@@ -1,0 +1,15 @@
+---
+- name: Download Terraform
+  get_url:
+    url: "https://releases.hashicorp.com/terraform/{{ terraform.version }}/terraform_{{ terraform.version }}_linux_amd64.zip"
+    dest: /opt/ansible/packages/terraform.zip
+    sha256sum: "{{ terraform.sha256sum }}"
+  become: yes
+  register: terraform_download
+
+- name: Extract Terraform
+  unarchive:
+    src: /opt/ansible/packages/terraform.zip
+    dest: /usr/bin
+  become: yes
+  when: terraform_download.changed
