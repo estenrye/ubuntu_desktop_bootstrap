@@ -1,0 +1,18 @@
+---
+- name: Retrieve Git global user.name
+  shell: git config --global user.name
+  ignore_errors: yes
+  register: git_user_name
+
+- name: Set Git global user.name
+  shell: "git config --global user.name '{{full_name}}'"
+  when: git_user_name.stdout != full_name
+
+- name: Retrieve Git global user.email
+  shell: git config --global user.email
+  ignore_errors: yes
+  register: git_user_email
+
+- name: Set Git global user.email
+  shell: "git config --global user.email '{{email_address}}'"
+  when: git_user_email.stdout != email_address

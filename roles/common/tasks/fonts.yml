@@ -1,0 +1,23 @@
+---
+- name: Create temp Isovka directory
+  file:
+    path: /tmp/iosevka
+    state: directory
+
+- name: Download Iosevka
+  unarchive:
+    remote_src: True
+    src: https://github.com/be5invis/Iosevka/releases/download/v1.14.3/01-iosevka-1.14.3.zip
+    dest: /tmp/iosevka
+
+- name: Copy the TTF Iosevka files into the fonts directory
+  copy:
+    src: "{{ item }}"
+    dest: /usr/local/share/fonts
+  with_fileglob:
+    - /tmp/iosevka/ttf/*.ttf
+  register: fonts_copied
+
+- name: Reload fonts
+  shell: fc-cache
+  when: fonts_copied.changed

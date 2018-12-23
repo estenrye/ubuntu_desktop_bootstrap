@@ -1,0 +1,4 @@
+---
+- name: Configure Git
+  include_tasks: git.yml
+

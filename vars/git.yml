@@ -1,0 +1,3 @@
+git_install_from_source: True
+git_install_path: "/usr"
+git_version: "2.20.1"

@@ -1,0 +1,5 @@
+---
+- name: Generate SSH Key
+  user:
+    name: "{{ primary_user }}"
+    generate_ssh_key: True

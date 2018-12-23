@@ -1,0 +1,22 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  vars_files:
+    - vars/git.yml
+  roles:
+    - { role: common, tags: common }
+    - { role: remote_access, tags: remote_access }
+    - { role: geerlingguy.git, tags: git }
+    - { role: development, tags: development }
+  vars_prompt:
+    - name: primary_user
+      prompt: Please enter the username of the primary user
+      default: esten
+      private: no
+    - name: full_name
+      prompt: Please enter your name for git config
+      default: Esten Rye
+      private: no
+    - name: email_address
+      prompt: Please enter your email address for git config
+      private: no

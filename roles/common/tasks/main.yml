@@ -1,0 +1,24 @@
+---
+- name: Update the apt cache
+  apt:
+    update_cache: true
+  become: yes
+
+- name: Install common packages
+  apt:
+    name: "{{ common_packages }}"
+    state: latest
+  become: yes
+
+- name: Install Flatpak
+  import_tasks: flatpak.yml
+  tags: flatpak
+  become: yes
+
+- name: Install fonts
+  import_tasks: fonts.yml
+  become: yes
+
+- name: Install SSH and generate SSH Key
+  import_tasks: ssh.yml
+  become: yes

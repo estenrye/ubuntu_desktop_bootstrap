@@ -1,0 +1,16 @@
+---
+- name: Install XRDP pacakage
+  apt:
+    name: xrdp
+    state: latest
+
+- name: Enable XRDP Service
+  service:
+    name: xrdp
+    state: started
+    enabled: yes
+
+- name: Add polkit authorization file to allow colord
+  template:
+    src: 02-allow-colord.conf.j2
+    dest: /etc/polkit-1/localauthority.conf.d/02-allow-colord.conf
