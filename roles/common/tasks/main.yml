@@ -4,6 +4,12 @@
     update_cache: true
   become: yes
 
+- name: installer cache folder.
+  file:
+    path: /opt/ansible/packages
+    state: directory
+  become: yes
+
 - name: Install common packages
   apt:
     name: "{{ common_packages }}"
@@ -22,3 +28,4 @@
 - name: Install SSH and generate SSH Key
   import_tasks: ssh.yml
   become: yes
+

@@ -1,6 +1,15 @@
 ---
+- name: Download Vivaldi
+  get_url:
+    url: https://downloads.vivaldi.com/stable/vivaldi-stable_2.2.1388.37-1_amd64.deb
+    dest: /opt/ansible/packages/vivaldi.deb
+    sha256sum: A5EC363B0D3E53A4A6119041F6EC19A6082D60DACD7A4EF39DC54ACB3725001F
+  register: vivaldi_download
+  become: yes
+
 - name: Install Vivaldi browser
   apt:
-    deb: https://downloads.vivaldi.com/stable/vivaldi-stable_2.2.1388.37-1_amd64.deb
+    deb: /opt/ansible/packages/vivaldi.deb
     state: present
   become: yes
+  when: vivaldi_download.changed

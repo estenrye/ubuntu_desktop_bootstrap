@@ -1,21 +1,29 @@
 ---
 - name: Create temp Isovka directory
   file:
-    path: /tmp/iosevka
+    path: /opt/ansible/packages/iosevka
     state: directory
 
 - name: Download Iosevka
+  get_url:
+    url: https://github.com/be5invis/Iosevka/releases/download/v2.0.2/01-iosevka-2.0.2.zip
+    dest: /opt/ansible/packages/iosevka.zip
+    sha256sum: A4710E893A8D7CBD2E57B3069BFA702C0E5C38FE734E4481E05A1DB1CAD41D09
+  register: iosevka_download
+
+- name: Extract Iosevka
   unarchive:
     remote_src: True
-    src: https://github.com/be5invis/Iosevka/releases/download/v1.14.3/01-iosevka-1.14.3.zip
-    dest: /tmp/iosevka
+    src: /opt/ansible/packages/iosevka.zip
+    dest: /opt/ansible/packages/iosevka
+  when: iosevka_download.changed
 
 - name: Copy the TTF Iosevka files into the fonts directory
   copy:
     src: "{{ item }}"
     dest: /usr/local/share/fonts
   with_fileglob:
-    - /tmp/iosevka/ttf/*.ttf
+    - /opt/ansible/packages/iosevka/ttf/*.ttf
   register: fonts_copied
 
 - name: Reload fonts
