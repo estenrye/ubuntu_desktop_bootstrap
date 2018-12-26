@@ -4,3 +4,6 @@
 
 - name: Install VSCode
   include_tasks: vscode.yml
+
+- name: Install dotnet core
+  include_tasks: dotnetcore.yml

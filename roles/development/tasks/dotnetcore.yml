@@ -1,0 +1,23 @@
+---
+- name: download dotnet registry package.
+  get_url:
+    dest: /opt/ansible/packages/packages-microsoft-prod.deb
+    url: https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
+    sha256sum: 54FB378267B8492F697A4D4F4CE3B339DA750DA00173F154D95701D81399AA6C
+  register: dotnet_download
+  become: yes
+
+- name: Install dotnet registry package.
+  apt:
+    deb: /opt/ansible/packages/packages-microsoft-prod.deb
+    state: present
+  when: dotnet_download.changed
+  become: yes
+
+- name: Install dotnet core.
+  apt:
+    name: "dotnet-sdk-{{ dotnet_version }}"
+    state: latest
+    update_cache: yes
+  become: yes
+
