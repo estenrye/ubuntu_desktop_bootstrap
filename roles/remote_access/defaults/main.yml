@@ -1,0 +1,38 @@
+xrdp:
+  dest: /opt/ansible/packages/xrdp
+  repo: https://github.com/neutrinolabs/xrdp.git
+  version: v0.9.9
+
+xorgxrdp:
+  dest: /opt/ansible/packages/xorgxrdp
+  repo: https://github.com/neutrinolabs/xorgxrdp.git
+  version: v0.2.9
+
+xrdp_allow_console_access: no # appears optional in Ubuntu 18.04
+xrdp_startwm_1804: "#fixGDM-by-Griffon\ngnome-shell-extension-tool -e ubuntu-appindicators@ubuntu.com\ngnome-shell-extension-tool -e ubuntu-dock@ubuntu.com\n\nif [ -f ~/.xrdp-fix-theme.txt ]; then\necho 'no action required'\nelse\ngsettings set org.gnome.desktop.interface gtk-theme 'Ambiance'\ngsettings set org.gnome.desktop.interface icon-theme 'Humanity'\necho 'check file for xrdp theme fix' >~/.xrdp-fix-theme.txt\nfi\n"
+xrdp_swartwm_1810: "#fixGDM-by-Griffon\ngnome-shell-extension-tool -e ubuntu-appindicators@ubuntu.com\ngnome-shell-extension-tool -e ubuntu-dock@ubuntu.com\n\nif [ -f ~/.xrdp-fix-theme.txt ]; then\necho 'no action required'\nelse\ngsettings set org.gnome.desktop.interface gtk-theme 'Yaru'\ngsettings set org.gnome.desktop.interface icon-theme 'Yaru'\necho 'check file for xrdp theme fix' >~/.xrdp-fix-theme.txt\nfi\n"
+
+xrdp_prerequisites:
+  - libx11-dev 
+  - ibxfixes-dev
+  - libssl-dev
+  - libpam0g-dev
+  - libtool
+  - libjpeg-dev
+  - flex
+  - bison
+  - gettext
+  - autoconf
+  - libxml-parser-perl
+  - libfuse-dev
+  - xsltproc
+  - libxrandr-dev
+  - python-libxml2
+  - nasm
+  - xserver-xorg-dev
+  - fuse
+  - pkg-config
+  - intltool
+  - xserver-xorg-core
+
+

@@ -1,0 +1,40 @@
+---
+- name: Clone xorgxrdp source
+  git:
+    clone: yes
+    dest: "{{ xorgxrdp.dest }}"
+    repo: "{{ xorgxrdp.repo }}"
+    version: "{{ xorgxrdp.version }}"
+  become: yes
+  register: xorgxrdp_source
+
+- name: Bootstrap xorgxrdp
+  shell: ./bootstrap
+  args:
+    chdir: "{{ xorgxrdp.dest }}"
+  become: yes
+  when: xorgxrdp_source.changed
+
+- name: Configure xorgxrdp
+  shell: ./configure
+  args:
+    chdir: "{{ xorgxrdp.dest }}"
+  become: yes
+  when: xorgxrdp_source.changed
+
+- name: Compile xorgxrdp
+  shell: make
+  args:
+    chdir: "{{ xorgxrdp.dest }}"
+  become: yes
+  when: xorgxrdp_source.changed
+
+- name: Install xorgxrdp
+  shell: make install
+  args:
+    chdir: "{{ xorgxrdp.dest }}"
+  become: yes
+  when: xorgxrdp_source.changed
+  notify:
+    - Restart xrdp.service
+    - Restart xrdp-sesman.service

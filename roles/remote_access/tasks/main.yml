@@ -1,23 +1,40 @@
 ---
-- name: Install XRDP pacakage
+- name: Install XRDP Prerequisite pacakages
   apt:
-    name: 
-      - xrdp
-      - paprefs
-      - xrdp-pulseaudio-installer
+    name: "{{ xrdp_prerequisites }}"
     state: latest
   become: yes
 
-- name: Enable XRDP Service
-  service:
-    name: xrdp
-    state: started
-    enabled: yes
+- name: Compile and Install xrdp
+  import_tasks: compile-xrdp.yml
+
+- name: Compile and install xorgxrdp
+  import_tasks: compile-xorgxrdp.yml
+  
+- name: Install Gnome Tweak Tool
+  apt:
+    name: gnome-tweak-tool
+    state: latest
   become: yes
 
-# From http://c-nergy.be/blog/?p=12073
-- name: Add polkit authorization file to allow colord
+- name: Allow console Access
+  lineinfile:
+    regexp: '^Sallowed_users=console'
+    line: 'allowed_users=anybody'
+    path: /etc/X11/Xwrapper.config
+    state: present
+  when: xrdp_allow_console_access
+
+- name: Add polkit authorization file to allow colord for all users
   template:
-    src: 02-allow-colord.conf.j2
-    dest: /etc/polkit-1/localauthority.conf.d/02-allow-colord.conf
+    src: 45-allow.colord.pkla.j2
+    dest: /etc/polkit-1/localauthority/50-local.d/45-allow.colord.pkla
+  become: yes
+
+- name: Fix theme and extensions
+  lineinfile:
+    regexp: '^# published under The MirOS Licence'
+    line: "{{ xrdp_startwm_1804 }}"
+    path: /etc/xrdp/startwm.sh
+    state: present
   become: yes

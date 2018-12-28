@@ -1,0 +1,56 @@
+---
+- name: Install xrdp-pulseaudio-installer
+  apt:
+    name: xrdp-pulseaudio-installer
+    state: latest
+  become: yes
+
+- name: Enable Source Code Repositories
+  apt_repository:
+      repo: "{{ item }}"
+      state: present
+      update_cache: yes
+  loop:
+    - deb http://be.archive.ubuntu.com/ubuntu/ bionic main restricted
+    - deb http://be.archive.ubuntu.com/ubuntu/ bionic restricted universe main multiverse
+    - deb http://be.archive.ubuntu.com/ubuntu/ bionic-updates restricted universe main multiverse
+    - deb http://be.archive.ubuntu.com/ubuntu/ bionic-backports main restricted universe multiverse
+    - deb http://be.archive.ubuntu.com/ubuntu/ bionic-security main restricted universe main multiverse
+  become: yes
+
+- name: Create pulseaudio source folder
+  file:
+    state: directory
+    path: /opt/ansible/packages/pulseaudio
+  become: yes
+
+- name: Download pulseaudio source
+  shell: apt source pulseaudio
+  args:
+    chdir: /opt/ansible/packages/pulseaudio
+  become: yes
+
+- name: Get pulseaudio version
+  shell: $(pulseaudio --version | awk '{print $2}')
+  register: pulse_version
+
+- name: Complie pulseaudio
+  shell: ./configure
+  args:
+    chdir: "/opt/ansible/packages/pulseaudio/pulseaudio-{{ pulse_version.stdout }}"
+  become: yes
+
+- name: Create xrdp sound modules
+  shell: "make PULSE_DIR='/opt/ansible/packages/pulseaudio/pulseaudio-{{ pulse_version.stdout }}'"
+  args:
+    chdir: /usr/src/xrdp-pulseaudio-installer
+  become: yes
+
+- name: Install xrdp sound modules in correct locations
+  shell: "install -t '{{item}}' -D -m 644 *.so"
+  args:
+    chdir: /usr/src/xrdp-pulseaudio-installer
+  loop:
+    - /var/lib/xrdp-pulseaudio-installer
+    - "/usr/lib/pulse-{{ pulse_version.stdout }}/modules"
+  become: yes

@@ -1,0 +1,40 @@
+---
+- name: Clone xrdp source
+  git:
+    clone: yes
+    dest: "{{ xrdp.dest }}"
+    repo: "{{ xrdp.repo }}"
+    version: "{{ xrdp.version }}"
+  become: yes
+  register: xrdp_source
+
+- name: Bootstrap xrdp
+  shell: ./bootstrap
+  args:
+    chdir: "{{ xrdp.dest }}"
+  become: yes
+  when: xrdp_source.changed
+
+- name: Configure xrdp
+  shell: ./configure --enable-fuse --enable-jpeg
+  args:
+    chdir: "{{ xrdp.dest }}"
+  become: yes
+  when: xrdp_source.changed
+
+- name: Compile xrdp
+  shell: make
+  args:
+    chdir: "{{ xrdp.dest }}"
+  become: yes
+  when: xrdp_source.changed
+
+- name: Install xrdp
+  shell: make install
+  args:
+    chdir: "{{ xrdp.dest }}"
+  become: yes
+  when: xrdp_source.changed
+  notify:
+    - Restart xrdp.service
+    - Restart xrdp-sesman.service
