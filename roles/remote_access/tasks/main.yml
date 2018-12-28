@@ -1,17 +1,23 @@
 ---
 - name: Install XRDP pacakage
   apt:
-    name: xrdp
+    name: 
+      - xrdp
+      - paprefs
+      - xrdp-pulseaudio-installer
     state: latest
+  become: yes
 
 - name: Enable XRDP Service
   service:
     name: xrdp
     state: started
     enabled: yes
+  become: yes
 
 # From http://c-nergy.be/blog/?p=12073
 - name: Add polkit authorization file to allow colord
   template:
     src: 02-allow-colord.conf.j2
     dest: /etc/polkit-1/localauthority.conf.d/02-allow-colord.conf
+  become: yes
