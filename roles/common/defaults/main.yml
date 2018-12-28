@@ -6,3 +6,7 @@ common_packages:
   - vim
   - openssh-server
   - python-pip
+  - sysstat
+  - numactl
+  - net-tools
+  - wireshark-qt
