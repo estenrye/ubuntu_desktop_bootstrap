@@ -5,7 +5,8 @@
 3. Click Continue.
 4. Accept the default keyboard configuration by clicking `Continue`.
 5. Select `Minimal Installation`
-6. Select `Install third-party software for graphics and Wi-Fi hardware and additional media formats`7. Click Continue
+6. Select `Install third-party software for graphics and Wi-Fi hardware and additional media formats`
+7. Click Continue
 8. Select `Erase disk and install Ubuntu`
 9. Select `Use LVM with the new Ubuntu installation`
 10. Click Install Now.
@@ -18,7 +19,8 @@
 17. Select a password for the primary user.
 18. Click Continue.
 
-# Manual package installations
+# Run Bootstrap
 
 1. `sudo apt-add-repository ppa:ansible/ansible`
 2. `sudo apt install -y ansible`
+3. `ansible-playbook playbook.yml`
