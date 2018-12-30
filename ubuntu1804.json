@@ -16,7 +16,8 @@
       "ssh_password": "vagrant",
       "preseed_file_name": "preseed.cfg",
       "disk_size": "51200",
-      "headless": "false"
+      "headless": "false",
+      "switch_name":"Internet"
     },
   
     "builders":
@@ -39,21 +40,22 @@
         "generation":2,
         "guest_additions_mode":"none",
         "ram_size":"{{ user `memory` }}",
-        "switch_name": "Default Switch",
-
+        "switch_name": "{{ user `switch_name` }}",
+        "mac_address":"0000deadbeef",
+        "ssh_timeout": "1h",
         "boot_wait":"5s",
         "boot_command":
         [
             "<esc><wait>",
             "set gfxpayload=keep",
-            "<enter><wait>",
+            "<enter>",
             "linux /linux",
             " gfxpayload=800x600x16,800x600 --- ",
             "auto=true ",
             "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg quiet",
-            "<enter><wait>",
+            "<enter>",
             "initrd /initrd.gz",
-            "<enter><wait>",
+            "<enter>",
             "boot",
             "<enter>"
         ],
