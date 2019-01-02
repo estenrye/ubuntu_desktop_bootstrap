@@ -17,7 +17,7 @@
       "preseed_file_name": "preseed.cfg",
       "disk_size": "51200",
       "headless": "false",
-      "switch_name":"Internet"
+      "switch_name":"Private"
     },
   
     "builders":
@@ -41,7 +41,7 @@
         "guest_additions_mode":"none",
         "ram_size":"{{ user `memory` }}",
         "switch_name": "{{ user `switch_name` }}",
-        "mac_address":"0000deadbeef",
+        "mac_address":"003510000101",
         "ssh_timeout": "1h",
         "boot_wait":"5s",
         "boot_command":
