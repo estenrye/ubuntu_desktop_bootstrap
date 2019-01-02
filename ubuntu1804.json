@@ -95,13 +95,18 @@
             "{{ .Name }}",
             "--audiocontroller",
             "hda"
-          ]
+          ],
+          [
+            "modifyvm",
+            "{{.Name}}",
+            "--nat-network1", 
+            "natnet1"]
         ],
         "boot_wait": "5s",
         "boot_command":
         [
           "<tab>",
-          "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ubuntu-desktop/{{ user `preseed_file_name` }} ",
+          "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/http/{{ user `preseed_file_name` }} ",
           "auto=true ",
           "net.ifnames=0 ",
           "hostname=localhost ",

@@ -4,3 +4,4 @@ packer_cache/*
 iso/*
 .vagrant/*
 bin
+*.vdi
