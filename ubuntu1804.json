@@ -17,7 +17,7 @@
       "preseed_file_name": "preseed.cfg",
       "disk_size": "51200",
       "headless": "false",
-      "switch_name":"Private"
+      "switch_name":"Default Switch"
     },
   
     "builders":
@@ -52,7 +52,7 @@
             "linux /linux",
             " gfxpayload=800x600x16,800x600 --- ",
             "auto=true ",
-            "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg quiet",
+            "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed-hyperv.cfg quiet",
             "<enter>",
             "initrd /initrd.gz",
             "<enter>",
