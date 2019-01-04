@@ -1,0 +1,1 @@
+&"$PSScriptRoot/bin/packer" build -only=hyperv-iso -force $PSScriptRoot/packer_templates/ubuntu1804.json
