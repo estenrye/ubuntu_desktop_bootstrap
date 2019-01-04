@@ -25,9 +25,12 @@
       {
         "vm_name": "{{ user `name` }}",
         "type": "hyperv-iso",
+        "iso_urls": [
+          "iso/ubuntu-18.04.1-server-amd64.iso",
+          "http://cdimage.ubuntu.com/ubuntu/releases/bionic/release/ubuntu-18.04.1-server-amd64.iso"
+        ],
         "iso_checksum_type": "sha256",
-        "iso_checksum": "bed8a55ae2a657f8349fe3271097cff3a5b8c3d1048cf258568f1601976fa30d",
-        "iso_urls": [ "{{ user `ubuntu_mirror` }}{{ user `ubuntu_codename` }}/main/installer-amd64/current/images/netboot/mini.iso" ],
+        "iso_checksum": "a5b0ea5918f850124f3d72ef4b85bda82f0fcd02ec721be19c1a6952791c8ee8",
         "ssh_username": "{{ user `ssh_username` }}",
         "ssh_password": "{{ user `ssh_password` }}",
         "headless": "{{ user `headless` }}",
@@ -44,20 +47,18 @@
         "mac_address":"003510000101",
         "ssh_timeout": "1h",
         "boot_wait":"5s",
-        "boot_command":
-        [
-            "<esc><wait>",
-            "set gfxpayload=keep",
-            "<enter>",
-            "linux /linux",
-            " gfxpayload=800x600x16,800x600 --- ",
-            "auto=true ",
-            "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed-hyperv.cfg quiet",
-            "<enter>",
-            "initrd /initrd.gz",
-            "<enter>",
-            "boot",
-            "<enter>"
+        "boot_command": [
+          "<esc><wait>",
+          "set gfxpayload=1024x768<enter>",
+          "linux /install/vmlinuz ",
+          "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/18.04/preseed-hyperv.cfg ",
+          "debian-installer=en_US.UTF-8 auto locale=en_US.UTF-8 kbd-chooser/method=us ",
+          "hostname={{.Name}} ",
+          "fb=false debconf/frontend=noninteractive ",
+          "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
+          "keyboard-configuration/variant=USA console-setup/ask_detect=false <enter>",
+          "initrd /install/initrd.gz<enter>",
+          "boot<enter>"
         ],
         "http_directory": "http"
       },
