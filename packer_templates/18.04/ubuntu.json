@@ -106,7 +106,19 @@
       "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -S -E bash -x '{{ .Path }}'",
       "scripts": [
         "scripts/setup.sh",
-        "scripts/ansible.sh",
+        "scripts/ansible.sh"
+      ]
+    },
+    {
+      "type":"ansible-local",
+      "playbook_files":[
+        "scripts/vagrant-playbook.yml"
+      ]
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -S -E bash -x '{{ .Path }}'",
+      "scripts": [
         "scripts/cleanup.sh"
       ]
     }
