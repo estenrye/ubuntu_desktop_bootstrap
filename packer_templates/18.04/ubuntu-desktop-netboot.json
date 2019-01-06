@@ -1,6 +1,5 @@
 {
     "name": "ubuntu-1804-netboot-desktop",
-    "vagrant_cloud_token": "{{ env `VAGRANT_CLOUD_TOKEN` }}",
     "version": "1.0.{{timestamp}}",
     "box_tag": "estenrye/ubuntu-desktop-1804",
     "packer_images_output_dir": "images",

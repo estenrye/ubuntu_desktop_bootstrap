@@ -1,6 +1,5 @@
 {
     "name": "ubuntu-1804-minimal-server",
-    "vagrant_cloud_token": "{{ env `VAGRANT_CLOUD_TOKEN` }}",
     "version": "1.0.{{timestamp}}",
     "box_tag": "estenrye/ubuntu-server-1804",
     "packer_images_output_dir": "images",
