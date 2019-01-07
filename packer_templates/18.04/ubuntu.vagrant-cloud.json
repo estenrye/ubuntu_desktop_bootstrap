@@ -1,4 +1,8 @@
 {
+  "variables":
+  {
+    "access_key":"{{ env `VAGRANT_CLOUD_TOKEN` }}"
+  },
   "builders":
   [
     {
@@ -134,7 +138,7 @@
       {
         "type": "vagrant-cloud",
         "box_tag": "{{ user `box_tag` }}",
-        "access_token": "{{ env `VAGRANT_CLOUD_TOKEN` }}",
+        "access_token": "{{ user `access_key` }}",
         "version": "{{ user `version` }}"
       }
     ]

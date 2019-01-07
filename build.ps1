@@ -14,7 +14,7 @@ if ($publish)
     -only=hyperv-iso `
     -force `
     -var-file="$PSScriptRoot/packer_templates/$version/$($varfile).json" `
-    $PSScriptRoot/packer_templates/$version/ubuntu.vagrantcloud.json
+    $PSScriptRoot/packer_templates/$version/ubuntu.vagrant-cloud.json
 }
 else
 {

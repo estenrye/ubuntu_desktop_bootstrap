@@ -1,6 +1,6 @@
 {
     "name": "ubuntu-1804-minimal-server",
-    "version": "1.0.{{timestamp}}",
+    "version": "1.0.0",
     "box_tag": "estenrye/ubuntu-server-1804",
     "packer_images_output_dir": "images",
     "cpus": "2",
