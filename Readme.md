@@ -24,3 +24,9 @@
 1. `sudo apt-add-repository ppa:ansible/ansible`
 2. `sudo apt install -y ansible`
 3. `ansible-playbook playbook.yml`
+
+
+# notes
+Azure LIS Iso Download: https://www.microsoft.com/en-us/download/details.aspx?id=55106
+
+vagrant insecure keypair: https://github.com/hashicorp/vagrant/tree/master/keys

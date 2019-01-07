@@ -1,1 +1,8 @@
 *.retry
+packer_cache/*
+*.box
+iso/*
+.vagrant/*
+bin
+*.vdi
+images/*
