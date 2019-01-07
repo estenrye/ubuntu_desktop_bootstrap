@@ -7,3 +7,13 @@
         key: https://raw.githubusercontent.com/hashicorp/vagrant/master/keys/vagrant.pub
         user: vagrant
         state: present
+    - name: Install MATE Terminal
+      apt:
+        name: mate-terminal
+        state: latest
+      become: yes
+    - name: Remove Gnome Terminal
+      apt:
+        name: gnome-terminal
+        state: removed
+      become: yes
