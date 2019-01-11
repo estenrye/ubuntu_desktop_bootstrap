@@ -13,5 +13,5 @@ variables:
 - group: ubuntu-desktop-bootstrap
 
 steps:
-- script: powershell build.ps1 -publish
+- script: powershell -File build.ps1 -publish
   displayName: 'Run packer hyper-v build'
