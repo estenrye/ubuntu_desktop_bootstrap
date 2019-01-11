@@ -6,8 +6,7 @@
 trigger:
 - master
 
-pool:
-  name: Default
+pool: Default
 
 variables:
 - group: ubuntu-desktop-bootstrap
