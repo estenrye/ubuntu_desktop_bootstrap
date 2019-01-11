@@ -18,4 +18,4 @@ steps:
   env:
     AWS_ACCESS_KEY: $(s3_access_key)
     AWS_SECRET_ACCESS_KEY: $(s3_secret_key)
-    VAGRANT_CLOOUD_TOKEN: $(vagrant_token)
+    VAGRANT_CLOUD_TOKEN: $(vagrant_token)
