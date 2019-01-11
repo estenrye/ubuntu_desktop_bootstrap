@@ -18,7 +18,7 @@ if (-not (Test-Path "$PSScriptRoot/bin"))
 if (-not (Test-Path "$PSScriptRoot/bin/packer.exe"))
 {
     Invoke-WebRequest -UseBasicParsing -Uri https://releases.hashicorp.com/packer/1.3.3/packer_1.3.3_windows_amd64.zip -OutFile "$PSScriptRoot/bin/packer.zip" -ErrorAction Stop
-    Expand-Archive bin/packer.zip -ErrorAction Stop
+    Expand-Archive bin/packer.zip -DestinationPath "$PSScriptRoot/bin" -ErrorAction Stop
     Unblock-File "$PSScriptRoot/bin/packer.exe" -ErrorAction Stop
 }
 
