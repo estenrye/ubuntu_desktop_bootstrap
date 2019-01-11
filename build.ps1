@@ -28,8 +28,6 @@ if (-not (Test-Path "$PSScriptRoot/bin/jq.exe"))
     Unblock-File "$PSScriptRoot/bin/jq.exe"  -ErrorAction Stop
 }
 
-pip show awscli
-
 if ($publish)
 {
     &"$PSScriptRoot/bin/packer" build `

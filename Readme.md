@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/estenrye/ubuntu-desktop-bootstrap/_apis/build/status/estenrye.ubuntu_desktop_bootstrap?branchName=master)](https://dev.azure.com/estenrye/ubuntu-desktop-bootstrap/_build/latest?definitionId=1?branchName=master)
+
 # Initial Operating System Installation
 
 1. On boot, select `Install Ubuntu`

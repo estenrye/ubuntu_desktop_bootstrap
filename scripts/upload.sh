@@ -3,7 +3,7 @@ JQ="${BIN}/bin/jq.exe"
 IMAGES="${BIN}/images"
 AWSCLI="$(pip show awscli | grep Location | sed 's/Location: //')/awscli"
 
-if [ -z $PACKER_BUILDER_TYPE ]; then
+if [ -z "$PACKER_BUILDER_TYPE" ]; then
   echo 'PACKER_BUILDER_TYPE is undefined.  using default: hyperv-iso'
   PACKER_BUILDER_TYPE='hyperv-iso'
 fi 

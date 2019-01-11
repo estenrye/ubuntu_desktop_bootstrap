@@ -142,9 +142,8 @@
       },
       {
         "type":"shell-local",
-        "execute_command":["bash", "-c", "{{.Vars}}", "{{.Script}}"],
-        "script": "./scripts/upload.sh",
-        "only_on":"windows"
+        "execute_command":["bash", "-c", "echo \"{{.Vars}} echo 'environment vars exported'\" | sed 's/^set/export/' | sed 's/ set / export /g' > images/env.sh; cat {{.Script}} >> images/env.sh; images/env.sh"],
+        "script": "./scripts/upload.sh"
       },
       {
         "type": "vagrant-cloud",
