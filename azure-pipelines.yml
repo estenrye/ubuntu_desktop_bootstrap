@@ -13,6 +13,9 @@ variables:
 - group: ubuntu-desktop-bootstrap
 
 steps:
+- powershell: ./setup/install-hyperv-win-2016.ps1
+  displayName: Install Hyper-V
+
 - powershell: ./build.ps1 -publish
   displayName: 'Run packer hyper-v build'
   env:
