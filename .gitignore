@@ -6,3 +6,5 @@ iso/*
 bin
 *.vdi
 images/*
+manifest.json
+manifest.json.lock

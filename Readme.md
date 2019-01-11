@@ -26,7 +26,12 @@
 3. `ansible-playbook playbook.yml`
 
 
-# notes
-Azure LIS Iso Download: https://www.microsoft.com/en-us/download/details.aspx?id=55106
+# Set up Build Environment
 
-vagrant insecure keypair: https://github.com/hashicorp/vagrant/tree/master/keys
+## Configure the AWS CLI profile
+1. `aws configure --profile wasabi`
+2. `aws configure --profile wasabi set s3.endpoint_url https://s3.wasabisys.com`
+
+## Configure vagrant cloud token
+1. `[System.Environment]::SetEnvironmentVariable('VAGRANT_CLOUD_TOKEN', 'vagrant-cloud-token', 'user')`
+
