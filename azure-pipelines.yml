@@ -12,7 +12,7 @@ variables:
 - group: ubuntu-desktop-bootstrap
 
 steps:
-- bash: setup/awscli.sh
+- bash: setup/install-awscli.sh
   env:
     AWS_ACCESS_KEY: $(s3_access_key)
     AWS_SECRET_ACCESS_KEY: $(s3_secret_key)
