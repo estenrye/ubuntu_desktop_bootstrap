@@ -12,6 +12,11 @@ variables:
 - group: ubuntu-desktop-bootstrap
 
 steps:
+- bash: setup/awscli.sh
+  env:
+    AWS_ACCESS_KEY: $(s3_access_key)
+    AWS_SECRET_ACCESS_KEY: $(s3_secret_key)
+
 - powershell: ./build.ps1 -publish
   displayName: 'Run packer hyper-v build'
   env:
