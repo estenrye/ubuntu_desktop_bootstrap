@@ -3,7 +3,6 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-timeoutInMinutes: 120
 trigger:
 - master
 
@@ -19,8 +18,8 @@ steps:
     AWS_SECRET_ACCESS_KEY: $(s3_secret_key)
 
 - powershell: ./build.ps1 -publish
-  timeoutInMinutes: 0
   displayName: 'Run packer hyper-v build'
+  timeoutInMinutes: 120
   env:
     AWS_ACCESS_KEY: $(s3_access_key)
     AWS_SECRET_ACCESS_KEY: $(s3_secret_key)
