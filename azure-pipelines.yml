@@ -3,7 +3,6 @@ jobs:
   timeoutInMinutes: 0
   cancelTimeoutInMinutes: 10
   strategy:
-    maxParallel: 1
     # note: `parallel` and `matrix` are mutually exclusive
     # you may specify one or the other; including both is an error
     parallel: 1
