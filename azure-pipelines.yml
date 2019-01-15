@@ -23,9 +23,3 @@ jobs:
         AWS_ACCESS_KEY: $(s3_access_key)
         AWS_SECRET_ACCESS_KEY: $(s3_secret_key)
         VAGRANT_CLOUD_TOKEN: $(vagrant_token)
-
-# timeoutInMinutes: 120
-  # trigger:
-  #   - master
-
-# pool: default

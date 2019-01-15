@@ -136,6 +136,14 @@
         "output": "{{ user `packer_images_output_dir` }}/{{ user `name` }}-{{ .Provider }}-{{ user `version` }}.box"
       },
       {
+        "type": "vagrant-cloud",
+        "box_tag": "{{ user `box_tag` }}",
+        "access_token": "{{ user `access_key` }}",
+        "version": "{{ user `version` }}",
+        "box_download_url":"https://s3.wasabisys.com/vagrant-cloud/ubuntu-desktop/{{ user `name` }}-{{ .Provider }}-{{ user `version` }}.box",
+        "no_release":true
+      },
+      {
         "type": "manifest",
         "output": "manifest.json",
         "strip_path": true
@@ -144,13 +152,6 @@
         "type":"shell-local",
         "execute_command":["bash", "-c", "echo \"{{.Vars}} echo 'environment vars exported'\" | sed 's/^set/export/' | sed 's/ set / export /g' > images/env.sh; cat {{.Script}} >> images/env.sh; images/env.sh"],
         "script": "./scripts/upload.sh"
-      },
-      {
-        "type": "vagrant-cloud",
-        "box_tag": "{{ user `box_tag` }}",
-        "access_token": "{{ user `access_key` }}",
-        "version": "{{ user `version` }}",
-        "box_download_url":"https://s3.wasabisys.com/vagrant-cloud/ubuntu-desktop/{{ user `name` }}-{{ .Provider }}-{{ user `version` }}.box"
       }
     ]
   ]
