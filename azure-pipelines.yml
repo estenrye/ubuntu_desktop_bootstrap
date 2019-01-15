@@ -15,8 +15,8 @@ jobs:
 # # https://aka.ms/yaml
 
 # timeoutInMinutes: 120
-  trigger:
-    - master
+  # trigger:
+  #   - master
 
 # pool: default
 
