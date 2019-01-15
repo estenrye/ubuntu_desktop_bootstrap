@@ -3,8 +3,6 @@ jobs:
   timeoutInMinutes: 0
   cancelTimeoutInMinutes: 10
   strategy:
-    # note: `parallel` and `matrix` are mutually exclusive
-    # you may specify one or the other; including both is an error
     parallel: 1
   pool:
     name: default
@@ -17,13 +15,13 @@ jobs:
 # # https://aka.ms/yaml
 
 # timeoutInMinutes: 120
-# trigger:
-# - master
+  trigger:
+    - master
 
 # pool: default
 
-# variables:
-# - group: ubuntu-desktop-bootstrap
+  variables:
+    - group: ubuntu-desktop-bootstrap
 
 # steps:
 # - bash: setup/install-awscli.sh
