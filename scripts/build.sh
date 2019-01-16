@@ -49,4 +49,4 @@ if [ ! -f "$PACKER" ]; then
     unzip -f $PACKER_ARCHIVE -d "${BIN}/bin"
 fi
 
-$PACKER build -only=$VAGRANT_BUILDER_TYPE -force -var-file="${BIN}/packer_templates/${UBUNTU_VERSION}/$($VAR_FILE).json" ${BIN}/packer_templates/${UBUNTU_VERSION}/ubuntu.json
+$PACKER build -only=$VAGRANT_BUILDER_TYPE -force -var-file="${BIN}/packer_templates/${UBUNTU_VERSION}/${$VAR_FILE}.json" ${BIN}/packer_templates/${UBUNTU_VERSION}/ubuntu.json
