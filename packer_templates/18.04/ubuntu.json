@@ -129,7 +129,12 @@
         "type": "vagrant",
         "compression_level": 9,
         "vagrantfile_template": "Vagrantfile-linux.template",
-        "output": "{{ user `packer_images_output_dir` }}/{{ user `name` }}-{{ .Provider }}.box"
+        "output": "{{ user `packer_images_output_dir` }}/{{ user `name` }}_{{ .Provider }}.box"
+      },
+      {
+        "type": "manifest",
+        "output": "manifest.json",
+        "strip_path": true
       }
     ]
   ]

@@ -1,7 +1,5 @@
 {
     "name": "ubuntu-1804-netboot-desktop",
-    "version": "1.0.0",
-    "box_tag": "estenrye/ubuntu-desktop-1804",
     "packer_images_output_dir": "images",
     "cpus": "2",
     "memory": "4096",

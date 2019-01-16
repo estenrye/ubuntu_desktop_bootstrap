@@ -3,15 +3,34 @@ JQ="${BIN}/bin/jq.exe"
 IMAGES="${BIN}/images"
 AWSCLI="$(pip show awscli | grep Location | sed 's/Location: //')/awscli"
 
-if [ -z "$PACKER_BUILDER_TYPE" ]; then
-  echo 'PACKER_BUILDER_TYPE is undefined.  using default: hyperv-iso'
-  PACKER_BUILDER_TYPE='hyperv-iso'
-fi 
+POSITIONAL=()
+while [[ $# -gt 0 ]]
+do
+key="$1"
 
-echo $BIN
-echo $JQ
-echo $PACKER_BUILDER_TYPE
-echo $AWSCLI
+case $key in
+    -b|--boxName)
+    VAGRANT_BOX_NAME="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    -v|--buildNumber)
+    BUILD_BUILDNUMBER="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    -p|--providerType)
+    VAGRANT_PROVIDER_TYPE="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    *)    # unknown option
+    POSITIONAL+=("$1") # save it in an array for later
+    shift # past argument
+    ;;
+esac
+done
+set -- "${POSITIONAL[@]}" # restore positional parameters
 
 if [ ! -f "$JQ" ]; then
     if [ "$(uname -s)" != 'Linux' ]; then
@@ -21,6 +40,6 @@ if [ ! -f "$JQ" ]; then
     fi
 fi
 
-boxfile=$(cat manifest.json | $JQ --raw-output ".builds[] | select(.name | contains(\"$PACKER_BUILDER_TYPE\")) | .files[0].name")
+boxfile=$(cat manifest.json | $JQ --raw-output ".builds[] | select(.artifact_id | contains(\"$VAGRANT_PROVIDER_TYPE\")) | .files[0].name")
 
-python $AWSCLI s3 cp "$IMAGES/$boxfile" "s3://vagrant-cloud/ubuntu-desktop/$boxfile" --endpoint-url=https://s3.wasabisys.com --profile wasabi
+python $AWSCLI s3 cp "$IMAGES/$boxfile" "s3://vagrant-cloud/$VAGRANT_BOX_NAME/$VAGRANT_PROVIDER_TYPE-$BUILD_BUILDNUMBER.box" --endpoint-url=https://s3.wasabisys.com --profile wasabi

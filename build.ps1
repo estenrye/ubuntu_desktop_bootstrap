@@ -3,9 +3,7 @@ param(
     [string]$version = '18.04',
 
     [ValidateSet('ubuntu-desktop-netboot', 'ubuntu-server-minimal')]
-    [string]$varfile = 'ubuntu-desktop-netboot',
-
-    [switch]$publish = $false
+    [string]$varfile = 'ubuntu-desktop-netboot'
 )
 
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
@@ -28,19 +26,8 @@ if (-not (Test-Path "$PSScriptRoot/bin/jq.exe"))
     Unblock-File "$PSScriptRoot/bin/jq.exe"  -ErrorAction Stop
 }
 
-if ($publish)
-{
-    &"$PSScriptRoot/bin/packer" build `
+&"$PSScriptRoot/bin/packer" build `
     -only=hyperv-iso `
     -force `
     -var-file="$PSScriptRoot/packer_templates/$version/$($varfile).json" `
-    $PSScriptRoot/packer_templates/$version/ubuntu.vagrant-cloud.json
-}
-else
-{
-    &"$PSScriptRoot/bin/packer" build `
-        -only=hyperv-iso `
-        -force `
-        -var-file="$PSScriptRoot/packer_templates/$version/$($varfile).json" `
-        $PSScriptRoot/packer_templates/$version/ubuntu.json
-}
+    $PSScriptRoot/packer_templates/$version/ubuntu.json
