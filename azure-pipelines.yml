@@ -18,10 +18,14 @@ jobs:
         AWS_ACCESS_KEY: $(s3_access_key)
         AWS_SECRET_ACCESS_KEY: $(s3_secret_key)
 
-    - powershell: ./build.ps1 -publish
+    - bash: setup/build.sh
       timeoutInMinutes: 0
       displayName: 'Run packer hyper-v build'
-
+      env:
+        UBUNTU_VERSION: 18.04
+        VAGRANT_BUILDER_TYPE: hyperv-iso
+        VAR_FILE: ubuntu-desktop-netboot
+      
     - bash: scripts/upload.sh
       displayName: Upload to Wasabi S3 storage
       timeoutInMinutes: 0
