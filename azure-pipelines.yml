@@ -1,6 +1,6 @@
 name: 1804.$(Date:yyyyMMdd)$(Rev:.r)
 jobs:
-- job: Build Vagrant Box - ubuntu-desktop - hyperv
+- job: Build Vagrant Box ubuntu desktop hyperv
   timeoutInMinutes: 0
   cancelTimeoutInMinutes: 10
   strategy:
