@@ -26,7 +26,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: $(s3_secret_key)
     
     - bash: scripts/upload.sh
-      displayNmae: Upload to Wasabi S3 storage
+      displayName: Upload to Wasabi S3 storage
       timeoutInMinutes: 0
       env:
         VAGRANT_BOX_NAME: ubuntu-desktop
