@@ -14,8 +14,8 @@ case $key in
     shift # past argument
     shift # past value
     ;;
-    -v|--buildNumber)
-    BUILD_BUILDNUMBER="$2"
+    -v|--vagrantBoxVersion)
+    VAGRANT_BOX_VERSION="$2"
     shift # past argument
     shift # past value
     ;;
@@ -42,4 +42,4 @@ fi
 
 boxfile=$(cat manifest.json | $JQ --raw-output ".builds[] | select(.artifact_id | contains(\"$VAGRANT_PROVIDER_TYPE\")) | .files[0].name")
 
-python $AWSCLI s3 cp "$IMAGES/$boxfile" "s3://vagrant-cloud/$VAGRANT_BOX_NAME/$VAGRANT_PROVIDER_TYPE-$BUILD_BUILDNUMBER.box" --endpoint-url=https://s3.wasabisys.com --profile wasabi
+python $AWSCLI s3 cp "$IMAGES/$boxfile" "s3://vagrant-cloud/$VAGRANT_BOX_NAME/$VAGRANT_PROVIDER_TYPE-$VAGRANT_BOX_VERSION.box" --endpoint-url=https://s3.wasabisys.com --profile wasabi

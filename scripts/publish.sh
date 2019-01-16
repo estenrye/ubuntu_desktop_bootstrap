@@ -19,8 +19,8 @@ case $key in
     shift # past argument
     shift # past value
     ;;
-    -v|--buildNumber)
-    BUILD_BUILDNUMBER="$2"
+    -v|--vagrantBoxVersion)
+    VAGRANT_BOX_VERSION="$2"
     shift # past argument
     shift # past value
     ;;
@@ -49,11 +49,11 @@ curl \
   --header "Content-Type: application/json" \
   --header "Authorization: Bearer $VAGRANT_CLOUD_TOKEN" \
   https://app.vagrantup.com/api/v1/box/$VAGRANT_CLOUD_USERNAME/$VAGRANT_BOX_NAME/versions \
-  --data "{ \"version\": { \"version\": \"$BUILD_BUILDNUMBER\" } }"
+  --data "{ \"version\": { \"version\": \"$VAGRANT_BOX_VERSION\" } }"
 
 # Create a new provider
 curl \
   --header "Content-Type: application/json" \
   --header "Authorization: Bearer $VAGRANT_CLOUD_TOKEN" \
-  https://app.vagrantup.com/api/v1/box/$VAGRANT_CLOUD_USERNAME/$VAGRANT_BOX_NAME/version/$BUILD_BUILDNUMBER/providers \
+  https://app.vagrantup.com/api/v1/box/$VAGRANT_CLOUD_USERNAME/$VAGRANT_BOX_NAME/version/$VAGRANT_BOX_VERSION/providers \
   --data "{ \"provider\": { \"name\": \"$VAGRANT_PROVIDER_TYPE\", \"url\":\"https://s3.wasabisys.com/vagrant-cloud/$VAGRANT_BOX_NAME/$VAGRANT_PROVIDER_TYPE-$BUILD_BUILDNUMBER.box\" } }"

@@ -19,8 +19,8 @@ case $key in
     shift # past argument
     shift # past value
     ;;
-    -v|--buildNumber)
-    BUILD_BUILDNUMBER="$2"
+    -v|--vagrantBoxVersion)
+    VAGRANT_BOX_VERSION="$2"
     shift # past argument
     shift # past value
     ;;
@@ -35,5 +35,5 @@ set -- "${POSITIONAL[@]}" # restore positional parameters
 # Release the version
 curl \
   --header "Authorization: Bearer $VAGRANT_CLOUD_TOKEN" \
-  https://app.vagrantup.com/api/v1/box/$VAGRANT_CLOUD_USERNAME/$VAGRANT_BOX_NAME/version/$BUILD_BUILDNUMBER/release \
+  https://app.vagrantup.com/api/v1/box/$VAGRANT_CLOUD_USERNAME/$VAGRANT_BOX_NAME/version/$VAGRANT_BOX_VERSION/release \
   --request PUT
