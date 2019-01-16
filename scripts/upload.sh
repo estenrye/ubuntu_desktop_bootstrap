@@ -32,11 +32,17 @@ esac
 done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
+if [ "$(uname -s)" != 'Linux' ]; then
+  CURL='/usr/bin/curl'
+else
+  CURL='/c/Windows/system32/curl'
+fi
+
 if [ ! -f "$JQ" ]; then
     if [ "$(uname -s)" != 'Linux' ]; then
-        curl -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-win64.exe -o "$JQ"
+        $CURL -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-win64.exe -o "$JQ"
     else
-        curl -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -o "$JQ"
+        $CURL -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -o "$JQ"
     fi
 fi
 

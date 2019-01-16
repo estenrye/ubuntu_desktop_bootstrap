@@ -31,6 +31,12 @@ BIN="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." >/dev/null 2>&1 && pwd )"
 PACKER="${BIN}/bin/packer.exe"
 PACKER_ARCHIVE="${BIN}/bin/packer.zip"
 
+if [ "$(uname -s)" != 'Linux' ]; then
+  $CURL='/usr/bin/curl'
+else
+  $CURL='/c/Windows/system32/curl'
+fi
+
 
 https://releases.hashicorp.com/packer/1.3.3/packer_1.3.3_windows_amd64.zip
 
