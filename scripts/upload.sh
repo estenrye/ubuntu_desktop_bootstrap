@@ -39,7 +39,7 @@ else
 fi
 
 if [ ! -f "$JQ" ]; then
-    if [ "$(uname -s)" != 'Linux' ]; then
+    if [ "$(uname -s)" = 'Linux' ]; then
         "$CURL" -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-win64.exe -o "$JQ"
     else
         "$CURL" -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -o "$JQ"

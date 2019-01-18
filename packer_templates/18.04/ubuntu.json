@@ -85,16 +85,14 @@
       "boot_wait": "5s",
       "boot_command":
       [
-        "<tab>",
-        "set gfxpayload=1024x768<enter>",
-        "linux {{ user `boot_command_kernel_location` }} ",
+        "<esc><wait>",
+        "linux vga=788 initrd={{ user `boot_command_initrd_location` }} ",
         "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/{{ user `preseed_file_name` }} ",
         "debian-installer=en_US.UTF-8 auto locale=en_US.UTF-8 kbd-chooser/method=us ",
         "hostname={{.Name}} ",
         "fb=false debconf/frontend=noninteractive ",
         "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
         "keyboard-configuration/variant=USA console-setup/ask_detect=false <enter>",
-        "initrd {{ user `boot_command_initrd_location` }}<enter>",
         "boot<enter>"
       ],
       "http_directory": "http"
