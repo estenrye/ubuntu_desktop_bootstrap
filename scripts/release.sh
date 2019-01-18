@@ -32,7 +32,7 @@ esac
 done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
-if [ "$(uname -s)" != 'Linux' ]; then
+if [ "$(uname -s)" -eq 'Linux' ]; then
   CURL='/usr/bin/curl'
 else
   CURL='/c/Windows/system32/curl'
