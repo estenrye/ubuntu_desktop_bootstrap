@@ -32,7 +32,7 @@ jobs:
       env:
         VAGRANT_BOX_NAME: ubuntu-desktop
         VAGRANT_PROVIDER_TYPE: hyperv
-        VAGRANT_BOX_VERSION: 1804.$(Date:yyyyMMdd)$(Rev:.r)
+        VAGRANT_BOX_VERSION: 1804.$(Build.BuildNumber)
 
     - bash: scripts/publish.sh
       displayName: Publish version to Vagrant Cloud
@@ -41,7 +41,7 @@ jobs:
         VAGRANT_CLOUD_USERNAME: estenrye
         VAGRANT_BOX_NAME: ubuntu-desktop
         VAGRANT_PROVIDER_TYPE: hyperv
-        VAGRANT_BOX_VERSION: 1804.$(Date:yyyyMMdd)$(Rev:.r)
+        VAGRANT_BOX_VERSION: 1804.$(Build.BuildNumber)
 
     - bash: scripts/release.sh
       displayName: Release published version on Vagrant Cloud.
@@ -49,4 +49,4 @@ jobs:
         VAGRANT_CLOUD_TOKEN: $(vagrant_token)
         VAGRANT_CLOUD_USERNAME: estenrye
         VAGRANT_BOX_NAME: ubuntu-desktop
-        VAGRANT_BOX_VERSION: 1804.$(Date:yyyyMMdd)$(Rev:.r)
+        VAGRANT_BOX_VERSION: 1804.$(Build.BuildNumber)

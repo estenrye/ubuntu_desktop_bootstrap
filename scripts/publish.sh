@@ -44,10 +44,13 @@ else
 fi
 
 # Create a new box
+echo "https://app.vagrantup.com/api/v1/boxes"
 "$CURL" --header "Content-Type: application/json" --header "Authorization: Bearer $VAGRANT_CLOUD_TOKEN" https://app.vagrantup.com/api/v1/boxes --data "{ \"box\": { \"username\": \"$VAGRANT_CLOUD_USERNAME\", \"name\": \"$VAGRANT_BOX_NAME\", \"is_private\":false } }"
 
 # Create a new version
+echo "https://app.vagrantup.com/api/v1/box/$VAGRANT_CLOUD_USERNAME/$VAGRANT_BOX_NAME/versions"
 "$CURL" --header "Content-Type: application/json" --header "Authorization: Bearer $VAGRANT_CLOUD_TOKEN" https://app.vagrantup.com/api/v1/box/$VAGRANT_CLOUD_USERNAME/$VAGRANT_BOX_NAME/versions --data "{ \"version\": { \"version\": \"$VAGRANT_BOX_VERSION\" } }"
 
+echo "https://app.vagrantup.com/api/v1/box/$VAGRANT_CLOUD_USERNAME/$VAGRANT_BOX_NAME/version/$VAGRANT_BOX_VERSION/providers"
 # Create a new provider
 "$CURL" --header "Content-Type: application/json" --header "Authorization: Bearer $VAGRANT_CLOUD_TOKEN" https://app.vagrantup.com/api/v1/box/$VAGRANT_CLOUD_USERNAME/$VAGRANT_BOX_NAME/version/$VAGRANT_BOX_VERSION/providers --data "{ \"provider\": { \"name\": \"$VAGRANT_PROVIDER_TYPE\", \"url\":\"https://s3.wasabisys.com/vagrant-cloud/$VAGRANT_BOX_NAME/$VAGRANT_PROVIDER_TYPE-$BUILD_BUILDNUMBER.box\" } }"
