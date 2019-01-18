@@ -35,14 +35,14 @@ set -- "${POSITIONAL[@]}" # restore positional parameters
 if [ "$(uname -s)" != 'Linux' ]; then
   CURL='/usr/bin/curl'
 else
-  CURL='/c/Program\ Files/Git/mingw64/bin/curl.exe'
+  CURL='/c/Program Files/Git/mingw64/bin/curl.exe'
 fi
 
 if [ ! -f "$JQ" ]; then
     if [ "$(uname -s)" != 'Linux' ]; then
-        $CURL -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-win64.exe -o "$JQ"
+        "$CURL" -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-win64.exe -o "$JQ"
     else
-        $CURL -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -o "$JQ"
+        "$CURL" -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -o "$JQ"
     fi
 fi
 

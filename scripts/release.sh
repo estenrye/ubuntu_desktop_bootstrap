@@ -35,8 +35,8 @@ set -- "${POSITIONAL[@]}" # restore positional parameters
 if [ "$(uname -s)" = 'Linux' ]; then
   CURL='/usr/bin/curl'
 else
-  CURL='/c/Program\ Files/Git/mingw64/bin/curl.exe'
+  CURL='/c/Program Files/Git/mingw64/bin/curl.exe'
 fi
 
 # Release the version
-$CURL --header "Authorization: Bearer $VAGRANT_CLOUD_TOKEN" https://app.vagrantup.com/api/v1/box/$VAGRANT_CLOUD_USERNAME/$VAGRANT_BOX_NAME/version/$VAGRANT_BOX_VERSION/release --request PUT
+"$CURL" --header "Authorization: Bearer $VAGRANT_CLOUD_TOKEN" https://app.vagrantup.com/api/v1/box/$VAGRANT_CLOUD_USERNAME/$VAGRANT_BOX_NAME/version/$VAGRANT_BOX_VERSION/release --request PUT

@@ -34,11 +34,11 @@ PACKER_ARCHIVE="${BIN}/bin/packer.zip"
 if [ "$(uname -s)" = 'Linux' ]; then
   CURL='/usr/bin/curl'
 else
-  CURL='/c/Program\ Files/Git/mingw64/bin/curl.exe'
+  CURL='/c/Program Files/Git/mingw64/bin/curl.exe'
 fi
 
 if [ ! -f "$PACKER" ]; then
-    $CURL -L https://releases.hashicorp.com/packer/1.3.3/packer_1.3.3_windows_amd64.zip -o "$PACKER_ARCHIVE"
+    "$CURL" -L https://releases.hashicorp.com/packer/1.3.3/packer_1.3.3_windows_amd64.zip -o "$PACKER_ARCHIVE"
     unzip -f $PACKER_ARCHIVE -d "${BIN}/bin"
 fi
 
