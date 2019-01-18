@@ -31,7 +31,7 @@ BIN="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." >/dev/null 2>&1 && pwd )"
 PACKER="${BIN}/bin/packer.exe"
 PACKER_ARCHIVE="${BIN}/bin/packer.zip"
 
-if [ "$(uname -s)" -eq 'Linux' ]; then
+if [ "$(uname -s)" = 'Linux' ]; then
   CURL='/usr/bin/curl'
 else
   CURL='/c/Windows/system32/curl'
