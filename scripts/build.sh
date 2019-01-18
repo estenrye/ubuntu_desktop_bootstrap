@@ -34,7 +34,7 @@ PACKER_ARCHIVE="${BIN}/bin/packer.zip"
 if [ "$(uname -s)" = 'Linux' ]; then
   CURL='/usr/bin/curl'
 else
-  CURL='/c/Windows/system32/curl'
+  CURL='/c/Program\ Files/Git/mingw64/bin/curl.exe'
 fi
 
 if [ ! -f "$PACKER" ]; then

@@ -40,7 +40,7 @@ set -- "${POSITIONAL[@]}" # restore positional parameters
 if [ "$(uname -s)" = 'Linux' ]; then
   CURL='/usr/bin/curl'
 else
-  CURL='/c/Windows/system32/curl'
+  CURL='/c/Program\ Files/Git/mingw64/bin/curl.exe'
 fi
 
 # Create a new box
