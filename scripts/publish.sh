@@ -44,7 +44,7 @@ else
 fi
 
 # Create a new box
-"$CURL" --header "Content-Type: application/json" --header "Authorization: Bearer $VAGRANT_CLOUD_TOKEN" https://app.vagrantup.com/api/v1/boxes --data "{ \"box\": { \"username\": \"$VAGRANT_CLOUD_USERNAME\", \"name\": \"$VAGRANT_BOX_NAME\" } }"
+"$CURL" --header "Content-Type: application/json" --header "Authorization: Bearer $VAGRANT_CLOUD_TOKEN" https://app.vagrantup.com/api/v1/boxes --data "{ \"box\": { \"username\": \"$VAGRANT_CLOUD_USERNAME\", \"name\": \"$VAGRANT_BOX_NAME\", \"is_private\":false } }"
 
 # Create a new version
 "$CURL" --header "Content-Type: application/json" --header "Authorization: Bearer $VAGRANT_CLOUD_TOKEN" https://app.vagrantup.com/api/v1/box/$VAGRANT_CLOUD_USERNAME/$VAGRANT_BOX_NAME/versions --data "{ \"version\": { \"version\": \"$VAGRANT_BOX_VERSION\" } }"
