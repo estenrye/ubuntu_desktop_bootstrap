@@ -1,0 +1,15 @@
+---
+- name: Download vsts agent
+  get_url:
+    url: https://vstsagentpackage.azureedge.net/agent/${vsts_agent.version}/vsts-agent-linux-x64-${vsts_agent.version}.tar.gz
+    dest: /opt/ansible/packages/vstsagent.tar.gz
+    sha256sum: "${vsts_agent.sha256sum}"
+  become: yes
+  register: vstsagent_download
+
+- name: Extract Packer
+  unarchive:
+    src: /opt/ansible/packages/vstsagent.tar.gz
+    dest: /opt/vstsagent
+  become: yes
+  when: vstsagent_download.changed
