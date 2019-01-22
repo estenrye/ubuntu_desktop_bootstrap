@@ -1,0 +1,21 @@
+---
+- name: Install packages.
+  apt:
+    name: 
+      - tftpd-hpa
+    state: latest
+  become: yes
+
+- name: Download Syslinux
+  get_url:
+    url: "https://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-6.03.zip"
+    dest: /opt/ansible/packages/syslinux.zip
+  become: yes
+  register: syslinux_download
+
+- name: Extract Syslinux
+  unarchive:
+    src: /opt/ansible/packages/syslinux.zip
+    dest: /opt/syslinux
+  become: yes
+  when: syslinux_download.changed
