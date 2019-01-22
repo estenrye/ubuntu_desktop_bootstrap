@@ -1,6 +1,7 @@
-BIN="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." >/dev/null 2>&1 && pwd )"
-JQ="${BIN}/bin/jq.exe"
-IMAGES="${BIN}/images"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." >/dev/null 2>&1 && pwd )"
+BIN="${DIR}/bin"
+JQ="${BIN}/jq.exe"
+IMAGES="${DIR}/images"
 AWSCLI="$(pip show awscli | grep Location | sed 's/Location: //')/awscli"
 
 POSITIONAL=()
@@ -32,19 +33,23 @@ esac
 done
 set -- "${POSITIONAL[@]}" # restore positional parameters
 
-if [ "$(uname -s)" != 'Linux' ]; then
+if [ "$(uname -s)" = 'Linux' ]; then
   CURL='/usr/bin/curl'
 else
   CURL='/c/Program Files/Git/mingw64/bin/curl.exe'
 fi
 
+mkdir -p "${DIR}"
+
 if [ ! -f "$JQ" ]; then
     if [ "$(uname -s)" = 'Linux' ]; then
-        "$CURL" -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-win64.exe -o "$JQ"
-    else
         "$CURL" -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -o "$JQ"
+    else
+        "$CURL" -L https://github.com/stedolan/jq/releases/download/jq-1.6/jq-win64.exe -o "$JQ"
     fi
 fi
+
+chmod u+x "${JQ}"
 
 boxfile=$(cat manifest.json | $JQ --raw-output ".builds[] | select(.artifact_id | contains(\"$VAGRANT_PROVIDER_TYPE\")) | .files[0].name")
 
