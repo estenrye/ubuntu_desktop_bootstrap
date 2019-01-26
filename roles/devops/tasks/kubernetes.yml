@@ -1,0 +1,19 @@
+---
+- name: Install Kubernetes apt-key.
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+  become: yes
+
+- name: Add Kubernetes Stable Repository
+  apt_repository:
+    repo: "{{kubernetes.repository}}"
+    state: present
+  become: yes
+
+- name: Install Kubernetes
+  apt:
+    name: kubeadm
+    state: latest
+    update_cache: yes
+  become: yes
