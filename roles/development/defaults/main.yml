@@ -5,4 +5,6 @@ vscode_extensions:
   - Pendrica.chef
   - EditorConfig.EditorConfig
 
-dotnet_version: 2.2
+dotnet:
+  version: 2.2
+  sha256sum: bf47049a5838ac6b7f79063b8908727f2ec2a83d95d3da23333bc3c006016583
